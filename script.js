@@ -20,12 +20,12 @@ buttonsArray.forEach((button) => {
         let output = document.getElementById("output");
         let string = output.innerText.toString();
 
-        console.log(string);
-        console.log(string.charAt(string.length - 1));
+        // console.log(string);
+        // console.log(string.charAt(string.length - 1));
 
         let element = document.createElement("div");
         element.innerHTML = "&times;";
-        console.log(element.innerHTML);
+        // console.log(element.innerHTML);
         if (
           (string.charAt(string.length - 1) == "+" ||
             string.charAt(string.length - 1) == "-" ||
@@ -52,6 +52,8 @@ buttonsArray.forEach((button) => {
       document.getElementById("output").innerText = document
         .getElementById("output")
         .innerText.slice(0, -1);
+      let output = document.getElementById("output");
+      output.style.setProperty("--disp", "none");
     }
     if (document.getElementById("output").innerText == "") {
       document.getElementById("output").innerText = "0";
@@ -65,6 +67,39 @@ buttonsArray.forEach((button) => {
       output.style.setProperty("--disp", "none");
     }
   });
-});
 
-// console.log(eval("--3*4"));
+  button.addEventListener("click", function () {
+    if (button.innerText == "=") {
+      let output = document.getElementById("output");
+      let string = output.innerText.toString();
+
+      let element = document.createElement("div");
+      element.innerHTML = "&times;";
+
+      if (
+        string.charAt(string.length - 1) == "+" ||
+        string.charAt(string.length - 1) == "-" ||
+        string.charAt(string.length - 1) == "/" ||
+        string.charAt(string.length - 1) == element.innerHTML
+      ) {
+        output.style.setProperty("--disp", "flex");
+      } else {
+        output.style.setProperty("--disp", "none");
+        let ans = eval(string.replaceAll(element.innerHTML, "*"));
+
+        let countDecimal;
+        if (Math.floor(ans) === ans) {
+          countDecimal = 0;
+        } else {
+          countDecimal = ans.toString().split(".")[1].length;
+        }
+
+        if (countDecimal > 3) {
+          document.getElementById("output").innerText = ans.toFixed(3);
+        } else {
+          document.getElementById("output").innerText = ans;
+        }
+      }
+    }
+  });
+});
