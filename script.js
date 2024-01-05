@@ -87,19 +87,23 @@ buttonsArray.forEach((button) => {
         output.style.setProperty("--disp", "flex");
       } else {
         output.style.setProperty("--disp", "none");
-        let ans = eval(string.replaceAll(element.innerHTML, "*"));
+        try {
+          let ans = eval(string.replaceAll(element.innerHTML, "*"));
 
-        let countDecimal;
-        if (Math.floor(ans) === ans) {
-          countDecimal = 0;
-        } else {
-          countDecimal = ans.toString().split(".")[1].length;
-        }
+          let countDecimal;
+          if (Math.floor(ans) === ans) {
+            countDecimal = 0;
+          } else {
+            countDecimal = ans.toString().split(".")[1].length;
+          }
 
-        if (countDecimal > 3) {
-          document.getElementById("output").innerText = ans.toFixed(3);
-        } else {
-          document.getElementById("output").innerText = ans;
+          if (countDecimal > 3) {
+            document.getElementById("output").innerText = ans.toFixed(3);
+          } else {
+            document.getElementById("output").innerText = ans;
+          }
+        } catch (err) {
+          output.style.setProperty("--disp", "flex");
         }
       }
     }
