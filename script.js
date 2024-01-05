@@ -30,11 +30,13 @@ buttonsArray.forEach((button) => {
           (string.charAt(string.length - 1) == "+" ||
             string.charAt(string.length - 1) == "-" ||
             string.charAt(string.length - 1) == "/" ||
-            string.charAt(string.length - 1) == element.innerHTML) &&
+            string.charAt(string.length - 1) == element.innerHTML ||
+            string.charAt(string.length - 1) == ".") &&
           (button.innerText == "+" ||
             button.innerText == "-" ||
             button.innerText == "/" ||
-            button.innerText == element.innerHTML)
+            button.innerText == element.innerHTML ||
+            button.innerText == ".")
         ) {
           output.style.setProperty("--disp", "flex");
         } else {
