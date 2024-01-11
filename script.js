@@ -89,21 +89,22 @@ buttonsArray.forEach((button) => {
         output.style.setProperty("--disp", "none");
         try {
           let ans = eval(string.replaceAll(element.innerHTML, "*"));
+          console.log("ans:", ans);
+
+          let countDecimal;
+          if (Math.floor(ans) === ans) {
+            countDecimal = 0;
+          } else {
+            countDecimal = ans.toString().split(".")[1].length;
+          }
+
+          if (countDecimal > 3) {
+            document.getElementById("output").innerText = ans.toFixed(3);
+          } else {
+            document.getElementById("output").innerText = ans;
+          }
         } catch (err) {
           output.style.setProperty("--disp", "flex");
-        }
-
-        let countDecimal;
-        if (Math.floor(ans) === ans) {
-          countDecimal = 0;
-        } else {
-          countDecimal = ans.toString().split(".")[1].length;
-        }
-
-        if (countDecimal > 3) {
-          document.getElementById("output").innerText = ans.toFixed(3);
-        } else {
-          document.getElementById("output").innerText = ans;
         }
       }
     }
